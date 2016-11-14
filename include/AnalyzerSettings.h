@@ -6,8 +6,6 @@
 
 
 struct AnalyzerSettingsData;
-struct AnalyzerValueDescription;
-
 class LOGICAPI AnalyzerSettings
 {
 public:
@@ -31,9 +29,6 @@ protected:
 	void AddExportExtension( U32 user_id, const char * extension_description, const char * extension );
 
 	const char* SetReturnString( const char* str );
-
-	//void ClearValueOutputs();
-	//void AddValueOutput( const char* name );
 public:
 	//Do not use, do not override
 	U32 GetSettingsInterfacesCount();
@@ -56,9 +51,6 @@ public:
 	void SetUseSystemDisplayBase( bool use_system_display_base );
 	DisplayBase GetAnalyzerDisplayBase();
 	void SetAnalyzerDisplayBase( DisplayBase analyzer_display_base );
-	//added 5-15-2012
-	//U32 GetValueDescriptionCount();
-	//AnalyzerValueDescription GetValueDescription( U32 index );
 
 protected:
 	struct AnalyzerSettingsData* mData;

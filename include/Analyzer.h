@@ -13,7 +13,6 @@ class ConditionManager;
 class ProgressManager;
 struct AnalyzerData;
 class AnalyzerResults;
-class ValuePutterInner;
 
 class LOGICAPI Analyzer
 {
@@ -38,11 +37,9 @@ public:
 	U32 GetSimulationSampleRate();
 	U32 GetSampleRate();
 	U64 GetTriggerSample();
-	//added 5-17-2012 for analog
-	//void AddValue( float value, U64 sample_number, U32 analog_channel );
 
 	//don't override, don't use:
-	void Init( DeviceCollection* device_collection, ConditionManager* condition_manager, ProgressManager* progress_manager/*, ValuePutterInner* value_putter_inner */);
+	void Init( DeviceCollection* device_collection, ConditionManager* condition_manager, ProgressManager* progress_manager );
 	void StartProcessing();
 	void StopWorkerThread();
 	AnalyzerSettings* GetAnalyzerSettings();
@@ -58,6 +55,20 @@ public:
 
 	void StartProcessing( U64 starting_sample );
 
+	
+	
+	/*
+	bool DoesChannelHaveBubbles( Channel& channel );
+	bool DoesChannelHaveMarkers( Channel& channel );
+	bool GetBubblesInRange( Channel& channel, S64 starting_sample_inclusive, S64 ending_sample_inclusive, U32* first_bubble, U32* last_bubble );
+	bool GetMarkersInRange( Channel& channel, S64 starting_sample_inclusive, S64 ending_sample_inclusive, U32* first_marker, U32* last_marker );
+	void GetBubblePosition( Channel& channel, U32 index, U64& starting_position_inclusive, U64& ending_position_inclusive );
+	ResultMarker GetMarker( Channel& channel, U32 index );
+	U64 GetNumBubbles( Channel& channel );
+	U64 GetNumMarkers( Channel& channel );
+*/
+
+	
 
 protected: 
 	struct AnalyzerData* mData;
