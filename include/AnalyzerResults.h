@@ -7,6 +7,8 @@
 #define DISPLAY_AS_ERROR_FLAG ( 1 << 7 )
 #define DISPLAY_AS_WARNING_FLAG ( 1 << 6 )
 
+#define SUPPORTS_PROTOCOL_SEARCH
+
 class LOGICAPI Frame
 {
 public:
