@@ -1,9 +1,7 @@
-﻿#ifndef ANALYZER_HELPERS_H
+#ifndef ANALYZER_HELPERS_H
 #define ANALYZER_HELPERS_H
 
 #include "Analyzer.h"
-#include <string>
-#include <cstring>
 
 class LOGICAPI AnalyzerHelpers
 {
@@ -13,7 +11,6 @@ public:
 	static U32 GetOnesCount( U64 value );
 	static U32 Diff32( U32 a, U32 b );
 
-	//static void GetNumberString( U64 number, DisplayBase display_base, U32 num_data_bits, char* result_string, U32 result_string_max_length, bool csv_safe = false );
 	static void GetNumberString( U64 number, DisplayBase display_base, U32 num_data_bits, char* result_string, U32 result_string_max_length );
 	static void GetTimeString( U64 sample, U64 trigger_sample, U32 sample_rate_hz, char* result_string, U32 result_string_max_length );
 
