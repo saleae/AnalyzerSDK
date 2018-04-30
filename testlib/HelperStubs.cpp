@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 #include "AnalyzerHelpers.h"
 
@@ -296,11 +297,51 @@ void AnalyzerHelpers::GetTimeString( U64 sample, U64 trigger_sample, U32 sample_
     strcpy( result_string, result.c_str() );
 }
 
+void AnalyzerHelpers::Assert(const char *message)
+{
+    // record this assert for the test?
+    std::cerr << "Helper assert:" << message << std::endl;
+    exit(-1);
+}
+
 U64 AnalyzerHelpers::AdjustSimulationTargetSample(U64 target_sample, U32 sample_rate, U32 simulation_sample_rate)
 {
     //we need to adjust the requested minimum_sample_index to our mSimulationSampleRateHz
     U64 multiplier = sample_rate / simulation_sample_rate;
     return target_sample / multiplier;
+}
+
+bool AnalyzerHelpers::DoChannelsOverlap(const Channel *channel_array, U32 num_channels)
+{
+    return false;
+}
+
+struct TestHelperFile
+{
+    std::string fileName;
+    bool isBinary;
+    std::string contents;
+};
+
+void *AnalyzerHelpers::StartFile(const char *file_name, bool is_binary)
+{
+    auto p = new TestHelperFile{file_name, is_binary, {}};
+    return p;
+}
+
+void AnalyzerHelpers::AppendToFile(const U8 *data, U32 data_length, void *file)
+{
+    assert(file);
+    auto p = reinterpret_cast<TestHelperFile*>(file);
+    p->contents.append(std::string(reinterpret_cast<const char*>(data), data_length));
+}
+
+void AnalyzerHelpers::EndFile(void *file)
+{
+    assert(file);
+    auto p = reinterpret_cast<TestHelperFile*>(file);
+    delete p;
+    // or save off for later testing
 }
 
 /////////////////////////////////////////////////////////////////////////////

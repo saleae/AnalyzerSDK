@@ -205,6 +205,18 @@ void AnalyzerSettingInterfaceChannel::SetChannel(const Channel &channel)
     d->mChannel = channel;
 }
 
+bool AnalyzerSettingInterfaceChannel::GetSelectionOfNoneIsAllowed()
+{
+    D_PTR();
+    return d->mNoneChannelAllowed;
+}
+
+void AnalyzerSettingInterfaceChannel::SetSelectionOfNoneIsAllowed(bool is_allowed)
+{
+    D_PTR();
+    d->mNoneChannelAllowed = is_allowed;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 
 

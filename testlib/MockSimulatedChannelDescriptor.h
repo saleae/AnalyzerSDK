@@ -43,7 +43,18 @@ private:
     std::vector<U64> mTransitions; // absolute sample numbers of transitions
 };
 
+class SimulatedChannelGroup
+{
+public:
+    SimulatedChannelGroup();
 
+ private:
+    friend ::SimulationChannelDescriptorGroup;
+
+    U32 mSampleRateHz = 12000000;
+
+    std::vector<SimulationChannelDescriptor> mChannels;
+};
 
 } // of namespace AnalyzerTest
 

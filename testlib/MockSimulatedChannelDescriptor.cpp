@@ -76,6 +76,10 @@ U64 SimulatedChannel::GetCurrentSample() const
     return mCurrentSample;
 }
 
+SimulatedChannelGroup::SimulatedChannelGroup()
+{
+}
+
 } // of namespace AnalyzerTest
 
 #define D_PTR() \
@@ -86,6 +90,17 @@ SimulationChannelDescriptor::SimulationChannelDescriptor()
 {
     auto d = new AnalyzerTest::SimulatedChannel();
     mData = reinterpret_cast<struct SimulationChannelDescriptorData*>(d);
+}
+
+SimulationChannelDescriptor::SimulationChannelDescriptor(const SimulationChannelDescriptor &other)
+{
+    auto d = new AnalyzerTest::SimulatedChannel();
+    mData = reinterpret_cast<struct SimulationChannelDescriptorData*>(d);
+
+    auto otherD = reinterpret_cast<AnalyzerTest::SimulatedChannel*>(other.mData);
+    d->mChannel = otherD->mChannel;
+    d->mSampleRateHz = otherD->mSampleRateHz;
+    d->mInitialBitState = otherD->mInitialBitState;
 }
 
 SimulationChannelDescriptor::~SimulationChannelDescriptor()
@@ -151,3 +166,51 @@ U64 SimulationChannelDescriptor::GetCurrentSampleNumber()
     D_PTR();
     return d->mCurrentSample;
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+#undef D_PTR
+#define D_PTR() \
+    auto d = reinterpret_cast<AnalyzerTest::SimulatedChannelGroup*>(mData);
+
+SimulationChannelDescriptorGroup::SimulationChannelDescriptorGroup()
+{
+    auto d = new AnalyzerTest::SimulatedChannelGroup();
+    mData = reinterpret_cast<struct SimulationChannelDescriptorGroupData*>(d);
+}
+
+SimulationChannelDescriptorGroup::~SimulationChannelDescriptorGroup()
+{
+    D_PTR();
+    delete d;
+}
+
+SimulationChannelDescriptor *SimulationChannelDescriptorGroup::Add(Channel &channel, U32 sample_rate, BitState intial_bit_state)
+{
+    D_PTR();
+    SimulationChannelDescriptor simChan;
+    simChan.SetChannel(channel);
+    simChan.SetInitialBitState(intial_bit_state);
+    simChan.SetSampleRate(sample_rate);
+    d->mChannels.push_back(simChan);
+    return &d->mChannels.back();
+}
+
+void SimulationChannelDescriptorGroup::AdvanceAll(U32 num_samples_to_advance)
+{
+    // implement me
+}
+
+SimulationChannelDescriptor *SimulationChannelDescriptorGroup::GetArray()
+{
+    D_PTR();
+    return d->mChannels.data();
+}
+
+U32 SimulationChannelDescriptorGroup::GetCount()
+{
+    D_PTR();
+    return d->mChannels.size();
+}
+
+

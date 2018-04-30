@@ -42,6 +42,7 @@ public:
 
     // interface-channel
     Channel mChannel;
+    bool mNoneChannelAllowed = false;
 
     int mValue; // bool, integer, number list
 

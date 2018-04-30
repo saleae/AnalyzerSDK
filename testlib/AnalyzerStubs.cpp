@@ -39,6 +39,11 @@ U64 Analyzer::GetTriggerSample()
     return 2;
 }
 
+void Analyzer::CheckIfThreadShouldExit()
+{
+    // record soemthing here?
+}
+
 U32 Analyzer::GetSampleRate()
 {
     D_PTR();
@@ -129,6 +134,11 @@ bool Channel::operator==(const Channel &channel) const
     return (mDeviceId == channel.mDeviceId) &&
             (mChannelIndex == channel.mChannelIndex) &&
             (mDataType == channel.mDataType);
+}
+
+bool Channel::operator!=(const Channel &channel) const
+{
+    return !(*this == channel);
 }
 
 bool Channel::operator<(const Channel &channel) const

@@ -17,6 +17,12 @@ AnalyzerResults::~AnalyzerResults()
 
 }
 
+void AnalyzerResults::AddMarker(U64 sample_number, AnalyzerResults::MarkerType marker_type, Channel &channel)
+{
+    D_PTR();
+    d->AddMarker(AnalyzerTest::MockResultData::MarkerInfo{sample_number, marker_type, channel});
+}
+
 U64 AnalyzerResults::AddFrame(const Frame &frame)
 {
     D_PTR();
@@ -178,6 +184,11 @@ U64 MockResultData::NextFrame() const
 void MockResultData::AddString(const std::string &s)
 {
     mStrings.push_back({CurrentFrame(), s});
+}
+
+void MockResultData::AddMarker(const MockResultData::MarkerInfo &marker)
+{
+    mMarkers.push_back(marker);
 }
 
 void MockResultData::SetCancelled(bool cancelled)

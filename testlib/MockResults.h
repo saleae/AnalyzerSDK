@@ -23,6 +23,7 @@ public:
     {
         U64 frame;
         AnalyzerResults::MarkerType type;
+        Channel channel;
     };
 
     U64 CurrentFrame() const;
@@ -35,6 +36,8 @@ public:
     };
 
     void AddString(const std::string& s);
+
+    void AddMarker(const MarkerInfo& marker);
 
     void SetCancelled(bool cancelled);
 
