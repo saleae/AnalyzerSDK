@@ -50,6 +50,14 @@ public:
         return TestAppendIntervals(sampleRateHz, err, Fargs...); // expand the pack and recurse
     }
 
+    double TestAppendClockedState(U64 sampleRateHz, double startingError, double clockPeriodSec, BitState bs);
+
+    void TestTransitionToState(BitState bs);
+
+    void TestAdvance(U32 samples);
+
+    void TestAdvanceTo(U64 exactSample);
+
     void ResetCurrentSample(U64 sampleNumber = 0);
 
     U32 AdvanceToSample(U64 sample); // returns number of times the value changed
@@ -62,6 +70,8 @@ public:
      * @param transitionCount
      */
     void AdvanceNTransitions(U32 transitionCount);
+
+    double TestAdvanceTime(U64 sampleRateHz, double currentError, double clockPeriodSec);
 private:
     friend class ::AnalyzerChannelData;
     /**

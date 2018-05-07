@@ -23,6 +23,7 @@ public:
     std::vector<SettingChannel> mChannels;
     std::vector<AnalyzerSettingInterface*> mInterfaces;
 
+    MockSettingInterface* GetSetting(U32 index);
     MockSettingInterface* GetSetting(const std::string& title);
 };
 

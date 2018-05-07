@@ -105,6 +105,14 @@ MockSettingInterface *MockSettings::GetSetting(const std::string &title)
     return MockSettingInterface::MockFromInterface(*it);
 }
 
+MockSettingInterface *MockSettings::GetSetting(U32 index)
+{
+    if (index >= mInterfaces.size())
+        return nullptr;
+
+    return MockSettingInterface::MockFromInterface(mInterfaces.at(index));
+}
+
 MockSettingInterface* MockSettingInterface::MockFromInterface(AnalyzerSettingInterface *iface)
 {
     return static_cast<InterfaceDataExtractor*>(iface)->mockData();

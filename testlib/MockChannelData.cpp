@@ -35,8 +35,9 @@ void MockChannelData::TestSetInitialBitState(BitState bs)
 void MockChannelData::TestAppendTransitionAfterSamples(U64 sampleCount)
 {
     assert(sampleCount > 0);
-    U64 currentTrans = mTransitions.empty() ? 0 : mTransitions.back();
-    mTransitions.push_back(currentTrans + sampleCount);
+    mTransitions.push_back(mCurrentSample + sampleCount);
+    mCurrentSample = mTransitions.back();
+    mCurrentState = InvertBitState(mCurrentState);
 }
 
 void MockChannelData::TestAppendTransitions(const std::vector<U64> &transitions)
@@ -44,6 +45,54 @@ void MockChannelData::TestAppendTransitions(const std::vector<U64> &transitions)
     for (auto t : transitions) {
         TestAppendTransitionAfterSamples(t);
     }
+}
+
+double MockChannelData::TestAppendClockedState(U64 sampleRateHz, double currentError, double clockPeriodSec, BitState bs)
+{
+    if (mCurrentState != bs) {
+        if (mTransitions.back() == mCurrentSample) {
+            // squash together, we actually remove a transition here
+            mTransitions.pop_back();
+        } else {
+            mTransitions.push_back(mCurrentSample);
+        }
+        mCurrentState = InvertBitState(mCurrentState);
+    }
+
+    return TestAdvanceTime(sampleRateHz, currentError, clockPeriodSec);
+}
+
+double MockChannelData::TestAdvanceTime(U64 sampleRateHz, double currentError, double clockPeriodSec)
+{
+    const double sampleDuration = 1.0 / sampleRateHz;
+    double nominalSamples = (clockPeriodSec / sampleDuration) + currentError;
+    const U32 samplesToAdvance = std::lround(nominalSamples);
+    currentError = nominalSamples - static_cast<double>(samplesToAdvance);
+    mCurrentSample += samplesToAdvance;
+    return currentError;
+}
+
+void MockChannelData::TestTransitionToState(BitState bs)
+{
+    if (bs == mCurrentState)
+        return;
+
+    if (mTransitions.back() == mCurrentSample) {
+        std::cerr << "TestTransitionToState without advancing from last transition" << std::endl;
+    }
+    mTransitions.push_back(mCurrentSample);
+    mCurrentState = bs;
+}
+
+void MockChannelData::TestAdvance(U32 samples)
+{
+    mCurrentSample += samples;
+}
+
+void MockChannelData::TestAdvanceTo(U64 exactSample)
+{
+    assert(mCurrentSample <= exactSample);
+    mCurrentSample = exactSample;
 }
 
 void MockChannelData::ResetCurrentSample(U64 sampleNumber)
