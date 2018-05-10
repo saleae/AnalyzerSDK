@@ -132,6 +132,29 @@ void MockSettingInterface::SetNumberedListIndexByLabel(const std::string &name)
     mValue = std::distance(mNamedValueList.begin(), it);
 }
 
+void MockSettingInterface::SetNumberedListIndexByValue(const double v)
+{
+    if (mTypeId != INTERFACE_NUMBER_LIST)
+        throw std::runtime_error("SetNumberedListIndexByLabel: not a number list");
+
+    auto it = std::find_if(mNamedValueList.begin(), mNamedValueList.end(),
+                  [v](const NamedValue& nv) { return v == nv.value; });
+    if (it == mNamedValueList.end()) {
+        throw std::runtime_error("No value in list: " + std::to_string(v));
+    }
+
+    mValue = std::distance(mNamedValueList.begin(), it);
+}
+
+double MockSettingInterface::GetNumberedValue() const
+{
+    if (mTypeId != INTERFACE_NUMBER_LIST)
+        throw std::runtime_error("SetNumberedListIndexByLabel: not a number list");
+
+    return mNamedValueList.at(mValue).value;
+}
+
+
 } // of namespace AnalyzerTest
 
 //////////////////////////////////////////////////////////////////////////////

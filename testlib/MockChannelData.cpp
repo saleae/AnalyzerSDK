@@ -26,7 +26,9 @@ MockChannelData::MockChannelData(Instance* plugin) :
 
 void MockChannelData::TestSetInitialBitState(BitState bs)
 {
+    assert(mTransitions.empty());
     mInitialState = bs;
+    mCurrentState = mInitialState;
     // insert a dummy sample before the real data, so that
     // the logic in AdvanceToSample is simpler
     mTransitions.push_back(0);

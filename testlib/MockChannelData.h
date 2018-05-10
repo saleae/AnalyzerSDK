@@ -64,6 +64,9 @@ public:
 
     void DumpTestData(double sampleRateMhz);
 
+    U64 GetCurrentSample() const
+    { return mCurrentSample; }
+
     /**
      * @brief AdvanceNTransitions - advance a number of transitions in the data
      * (or run off the end)

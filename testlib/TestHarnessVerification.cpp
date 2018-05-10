@@ -66,9 +66,34 @@ void verifyMockChannelData()
     TEST_VERIFY_EQ(channelData.GetSampleOfNextEdge(), 34);
 }
 
+void verifyMockChannelData2()
+{
+    Instance plugin;
+
+    const int sampleRateHz = 12000000; // 12MHz
+
+    MockChannelData channelData(&plugin);
+    channelData.TestSetInitialBitState(BIT_HIGH);
+    channelData.TestAdvance(5);
+    channelData.TestTransitionToState(BIT_HIGH);
+    channelData.TestAdvance(6);
+    channelData.TestTransitionToState(BIT_LOW);
+    channelData.TestAdvance(8);
+
+    channelData.ResetCurrentSample();
+
+    TEST_VERIFY(channelData.WouldAdvancingCauseTransition(2) == false);
+    TEST_VERIFY(channelData.GetSampleOfNextEdge() == 11);
+    channelData.AdvanceToNextEdge();
+    TEST_VERIFY(channelData.GetCurrentSample() == 11);
+
+
+}
+
 int main(int argc, char* argv[])
 {
     verifyMockChannelData();
+    verifyMockChannelData2();
 
     std::cout << "test harness verified ok" << std::endl;
     return EXIT_SUCCESS;

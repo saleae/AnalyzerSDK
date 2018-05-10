@@ -33,6 +33,9 @@ public:
     static MockSettingInterface *MockFromInterface(AnalyzerSettingInterface *iface);
 
     void SetNumberedListIndexByLabel(const std::string& name);
+    void SetNumberedListIndexByValue(const double v);
+
+    double GetNumberedValue() const;
 
     AnalyzerInterfaceTypeId mTypeId;
     std::string mTitle;
