@@ -6,6 +6,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <cstring>
 
 extern "C" {
     Analyzer* __cdecl CreateAnalyzer( );

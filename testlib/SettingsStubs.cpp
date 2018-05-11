@@ -154,6 +154,11 @@ double MockSettingInterface::GetNumberedValue() const
     return mNamedValueList.at(mValue).value;
 }
 
+int MockSettingInterface::GetNumberedValueInt() const
+{
+    return static_cast<int>(GetNumberedValue());
+}
+
 
 } // of namespace AnalyzerTest
 

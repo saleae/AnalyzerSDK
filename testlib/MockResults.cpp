@@ -240,6 +240,16 @@ std::string MockResultData::GetTabularText(U32 index) const
     return mTabularText.at(index);
 }
 
+U32 MockResultData::TotalMarkerCount() const
+{
+    return mMarkers.size();
+}
+
+MockResultData::MarkerInfo MockResultData::GetMarker(U32 index) const
+{
+    return mMarkers.at(index);
+}
+
 std::ostream &operator<<(std::ostream &out, const MockResultData::FrameRange &range)
 {
     out << "Frames " << range.first << ":" << range.second;

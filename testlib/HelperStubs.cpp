@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include <cassert>
 
 #include "AnalyzerHelpers.h"
 

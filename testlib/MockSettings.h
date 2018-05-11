@@ -37,6 +37,13 @@ public:
 
     double GetNumberedValue() const;
 
+    /**
+     * @brief GetNumberedValueInt - return the value but cast to an int
+     * This is syntactic sugar for MSVC especially
+     * @return
+     */
+    int GetNumberedValueInt() const;
+
     AnalyzerInterfaceTypeId mTypeId;
     std::string mTitle;
     std::string mTooltip;

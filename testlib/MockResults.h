@@ -54,6 +54,8 @@ public:
     U32 TotalTabularTextCount() const;
     std::string GetTabularText(U32 index) const;
 
+    U32 TotalMarkerCount() const;
+    MarkerInfo GetMarker(U32 index) const;
 private:
     friend ::AnalyzerResults;
 
