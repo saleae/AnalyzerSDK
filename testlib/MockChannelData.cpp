@@ -37,7 +37,13 @@ void MockChannelData::TestSetInitialBitState(BitState bs)
 void MockChannelData::TestAppendTransitionAfterSamples(U64 sampleCount)
 {
     assert(sampleCount > 0);
-    mTransitions.push_back(mCurrentSample + sampleCount);
+    TestAppendTransitionAtSamples(mCurrentSample + sampleCount);
+}
+
+void MockChannelData::TestAppendTransitionAtSamples(U64 sample)
+{
+    assert(sample > mCurrentSample);
+    mTransitions.push_back(sample);
     mCurrentSample = mTransitions.back();
     mCurrentState = InvertBitState(mCurrentState);
 }

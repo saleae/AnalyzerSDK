@@ -20,6 +20,8 @@ public:
 
     void TestAppendTransitionAfterSamples(U64 sampleCount);
 
+    void TestAppendTransitionAtSamples(U64 sampleCount);
+
     void TestAppendTransitions(const std::vector<U64>& transitions);
 
     // base case ending with std::vec<double>
