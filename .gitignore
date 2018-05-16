@@ -1,0 +1,7 @@
+.DS_Store
+CMakeFiles
+Makefile
+lib*.a
+*.lib
+*.cmake
+TestHarnessVerification*
