@@ -76,9 +76,4 @@ public:
 
 #include <memory> //required by some compilers for std::auto_ptr
 
-#ifdef _MSC_VER
-#define snprintf _snprintf_s
-#define vsnprintf vsprintf_s
-#endif
-
 #endif //LOGICPUBLICTYPES
