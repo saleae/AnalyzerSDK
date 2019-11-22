@@ -3,19 +3,19 @@
 
 #include <vector>
 
-#ifndef WIN32
+#ifndef _WIN32
 	#define __cdecl
 #endif
 
 //If we discover that Analyzer needs to be compiled statically, and that __declspec(dllexport) causes an error with that build,
 //then we need to add a define to turn this on or off for that project. i.e. Device SDK build. Not tested yet.
-#ifdef WIN32
+#ifdef _WIN32
 	#define LOGICAPI __declspec(dllexport)
 #else
 	#define LOGICAPI __attribute__ ((visibility("default")))
 #endif
 
-#ifdef WIN32
+#ifdef _WIN32
 	#define ANALYZER_EXPORT __declspec(dllexport)
 #else
 	#define ANALYZER_EXPORT __attribute__ ((visibility("default")))
