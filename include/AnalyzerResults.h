@@ -108,6 +108,7 @@ class LOGICAPI AnalyzerResults
     void CancelExport();
     double GetProgress();
     void StartExportThread( const char* file, DisplayBase display_base, U32 export_type_user_id );
+    AnalyzerResultsData* GetAnalyzerResultsData();
 
   protected:
     struct AnalyzerResultsData* mData;
