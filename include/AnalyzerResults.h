@@ -16,10 +16,6 @@ class LOGICAPI FrameV2
     FrameV2();
     ~FrameV2();
 
-    void SetType( const char* type );
-    void SetStartingSampleInclusive( U64 sample_number );
-    void SetEndingSampleExclusive( U64 sample_number );
-
     void AddString( const char* key, const char* value );
     void AddDouble( const char* key, double value );
     void AddInteger( const char* key, S64 value );
@@ -84,7 +80,7 @@ class LOGICAPI AnalyzerResults
     void AddMarker( U64 sample_number, MarkerType marker_type, Channel& channel );
 
     U64 AddFrame( const Frame& frame );
-    U64 AddFrameV2( const FrameV2& frame );
+    void AddFrameV2( const FrameV2& frame, const char* type, U64 starting_sample, U64 ending_sample );
     U64 CommitPacketAndStartNewPacket();
     void CancelPacketAndStartNewPacket();
     void AddPacketToTransaction( U64 transaction_id, U64 packet_id );
