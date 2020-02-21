@@ -9,6 +9,7 @@
 
 #define SUPPORTS_PROTOCOL_SEARCH
 
+#ifdef LOGIC2
 class FrameV2Data;
 class LOGICAPI FrameV2
 {
@@ -24,6 +25,7 @@ class LOGICAPI FrameV2
 
     FrameV2Data* mInternals;
 };
+#endif
 
 class LOGICAPI Frame
 {
@@ -77,10 +79,12 @@ class LOGICAPI AnalyzerResults
     virtual void GenerateTransactionTabularText( U64 transaction_id, DisplayBase display_base ) = 0;
 
   public: // adding/setting data
-    void AddMarker( U64 sample_number, MarkerType marker_type, Channel& channel );
-
-    U64 AddFrame( const Frame& frame );
+#ifdef LOGIC2
     void AddFrameV2( const FrameV2& frame, const char* type, U64 starting_sample, U64 ending_sample );
+#endif
+
+    void AddMarker( U64 sample_number, MarkerType marker_type, Channel& channel );
+    U64 AddFrame( const Frame& frame );
     U64 CommitPacketAndStartNewPacket();
     void CancelPacketAndStartNewPacket();
     void AddPacketToTransaction( U64 transaction_id, U64 packet_id );
