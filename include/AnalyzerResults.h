@@ -55,7 +55,8 @@ class LOGICAPI AnalyzerResults
   public:
     enum MarkerType
     {
-        Dot,
+        None = -1,
+        Dot = 0,
         ErrorDot,
         Square,
         ErrorSquare,
@@ -81,6 +82,7 @@ class LOGICAPI AnalyzerResults
   public: // adding/setting data
 #ifdef LOGIC2
     void AddFrameV2( const FrameV2& frame, const char* type, U64 starting_sample, U64 ending_sample );
+    void AddFrameV2Marker( const FrameV2& frame, const char* type, U64 starting_sample, U64 ending_sample, MarkerType marker_type );
 #endif
 
     void AddMarker( U64 sample_number, MarkerType marker_type, Channel& channel );
