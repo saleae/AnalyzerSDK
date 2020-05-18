@@ -10,18 +10,25 @@
 #define SUPPORTS_PROTOCOL_SEARCH
 
 #ifdef LOGIC2
+class AnalyzerResults;
 class FrameV2Data;
 class LOGICAPI FrameV2
 {
   public:
-    FrameV2();
+    FrameV2( AnalyzerResults& );
+    FrameV2( const FrameV2& ) = delete;
+    FrameV2( FrameV2&& );
     ~FrameV2();
+
+    FrameV2& operator=( const FrameV2& ) = delete;
+    FrameV2& operator=( FrameV2&& );
 
     void AddString( const char* key, const char* value );
     void AddDouble( const char* key, double value );
     void AddInteger( const char* key, S64 value );
     void AddBoolean( const char* key, bool value );
-    void AddByte( const char* key, U8 value );
+    void AddByte( const char* key, U8 value, bool packet_continutation = false );
+    void AddByteArray( const char* key, U8* value, bool packet_continutation = false );
 
     FrameV2Data* mInternals;
 };
