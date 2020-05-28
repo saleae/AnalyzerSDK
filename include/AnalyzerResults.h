@@ -22,6 +22,7 @@ class LOGICAPI FrameV2
     void AddInteger( const char* key, S64 value );
     void AddBoolean( const char* key, bool value );
     void AddByte( const char* key, U8 value );
+    void AddByteArray( const char* key, const U8* data, U64 length );
 
     FrameV2Data* mInternals;
 };
