@@ -1,7 +1,7 @@
 .DS_Store
-CMakeFiles
-Makefile
-lib*.a
-*.lib
-*.cmake
-TestHarnessVerification*
+testlib/**/CMakeFiles
+testlib/**/Makefile
+testlib/**/lib*.a
+testlib/**/*.lib
+testlib/**/*.cmake
+testlib/**/TestHarnessVerification*
