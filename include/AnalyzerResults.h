@@ -14,7 +14,7 @@ class LOGICAPI Frame
   public:
     Frame();
     Frame( const Frame& frame );
-    ~Frame();
+    virtual ~Frame();
 
     S64 mStartingSampleInclusive;
     S64 mEndingSampleInclusive;
