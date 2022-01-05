@@ -38,8 +38,8 @@ public:
 	U32 GetSimulationSampleRate();
 	U32 GetSampleRate();
 	U64 GetTriggerSample();
-	//added 5-17-2012 for analog
-	//void AddValue( float value, U64 sample_number, U32 analog_channel );
+	// call this function if your analyzer produces FrameV2 results
+	void UseFrameV2();
 
 	//don't override, don't use:
 	void Init( DeviceCollection* device_collection, ConditionManager* condition_manager, ProgressManager* progress_manager/*, ValuePutterInner* value_putter_inner */);
