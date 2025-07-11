@@ -26,6 +26,6 @@ elseif(WIN32)
                                               IMPORTED_IMPLIB   ${CMAKE_CURRENT_LIST_DIR}/lib_x86_64/Analyzer.lib)
 elseif(UNIX AND NOT APPLE)
     set_target_properties(Saleae::AnalyzerSDK PROPERTIES
-                                              IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/lib_x86_64/libAnalyzer.so
+                                              IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/lib_${CMAKE_SYSTEM_PROCESSOR}/libAnalyzer.so
                                               IMPORTED_SONAME   libAnalyzer.so)
 endif()
