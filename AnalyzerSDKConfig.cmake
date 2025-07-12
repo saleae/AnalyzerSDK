@@ -25,7 +25,14 @@ elseif(WIN32)
                                               IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/lib_x86_64/Analyzer.dll
                                               IMPORTED_IMPLIB   ${CMAKE_CURRENT_LIST_DIR}/lib_x86_64/Analyzer.lib)
 elseif(UNIX AND NOT APPLE)
+    if(CMAKE_SYSTEM_PROCESSOR STREQUAL "aarch64")
+        set(LIB_DIR "lib_arm64")
+    elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL "x86_64")
+        set(LIB_DIR "lib_x86_64")
+    else()
+        message(FATAL_ERROR "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}. Only x86_64 and arm64 are supported.")
+    endif()
     set_target_properties(Saleae::AnalyzerSDK PROPERTIES
-                                              IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/lib_${CMAKE_SYSTEM_PROCESSOR}/libAnalyzer.so
+                                              IMPORTED_LOCATION ${CMAKE_CURRENT_LIST_DIR}/${LIB_DIR}/libAnalyzer.so
                                               IMPORTED_SONAME   libAnalyzer.so)
 endif()
